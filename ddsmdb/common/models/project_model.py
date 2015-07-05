@@ -23,7 +23,7 @@ class ProjectModel(db.Document):
     def info(self):
         data = {'created':str(self.created_at), 'updated':str(self.last_updated), 'id': str(self.id), 
         'owner':str(self.owner.id), 'name': self.name, 'private':self.private, 
-        'duration': self.duration, 'total_records':self.record_count,
+        'duration': str(self.duration), 'total_records':self.record_count,
         'total_diffs':self.diff_count}
         # data['status'] = self.status
         return data
