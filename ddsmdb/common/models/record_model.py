@@ -56,8 +56,12 @@ class RecordModel(db.Document):
 
     @property
     def duration(self):
-        print str(datetime.datetime.strptime(str(self.updated_at), '%Y-%m-%d %H:%M:%S.%f')-datetime.datetime.strptime(str(self.created_at), '%Y-%m-%d %H:%M:%S.%f'))
-        return datetime.datetime.strptime(str(self.updated_at), '%Y-%m-%d %H:%M:%S.%f')-datetime.datetime.strptime(str(self.created_at), '%Y-%m-%d %H:%M:%S.%f')
+        try:
+            print str(datetime.datetime.strptime(str(self.updated_at), '%Y-%m-%d %H:%M:%S.%f')-datetime.datetime.strptime(str(self.created_at), '%Y-%m-%d %H:%M:%S.%f'))
+            return datetime.datetime.strptime(str(self.updated_at), '%Y-%m-%d %H:%M:%S.%f')-datetime.datetime.strptime(str(self.created_at), '%Y-%m-%d %H:%M:%S.%f')
+        except:
+            print str(datetime.datetime.strptime(str(self.updated_at), '%Y-%m-%d %H:%M:%S')-datetime.datetime.strptime(str(self.created_at), '%Y-%m-%d %H:%M:%S'))
+            return datetime.datetime.strptime(str(self.updated_at), '%Y-%m-%d %H:%M:%S')-datetime.datetime.strptime(str(self.created_at), '%Y-%m-%d %H:%M:%S')
 
     def info(self):
         data = {'updated':str(self.updated_at),

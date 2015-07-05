@@ -85,4 +85,7 @@ class ProjectModel(db.Document):
             #     return self.records.sum('duration')
             # except:
             #     return 0.0
-            return str(datetime.datetime.strptime(str(self.last_updated), '%Y-%m-%d %H:%M:%S.%f')-datetime.datetime.strptime(str(self.created_at), '%Y-%m-%d %H:%M:%S.%f'))
+            try:
+                return str(datetime.datetime.strptime(str(self.last_updated), '%Y-%m-%d %H:%M:%S.%f')-datetime.datetime.strptime(str(self.created_at), '%Y-%m-%d %H:%M:%S.%f'))
+            except:
+                return str(datetime.datetime.strptime(str(self.last_updated), '%Y-%m-%d %H:%M:%S')-datetime.datetime.strptime(str(self.created_at), '%Y-%m-%d %H:%M:%S'))
