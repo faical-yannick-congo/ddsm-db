@@ -86,6 +86,14 @@ class ProjectModel(db.Document):
             # except:
             #     return 0.0
             try:
-                return str(datetime.datetime.strptime(str(self.last_updated), '%Y-%m-%d %H:%M:%S.%f')-datetime.datetime.strptime(str(self.created_at), '%Y-%m-%d %H:%M:%S.%f'))
+                last_updated_strp = datetime.datetime.strptime(str(self.last_updated), '%Y-%m-%d %H:%M:%S.%f')
             except:
-                return str(datetime.datetime.strptime(str(self.last_updated), '%Y-%m-%d %H:%M:%S')-datetime.datetime.strptime(str(self.created_at), '%Y-%m-%d %H:%M:%S'))
+                last_updated_strp = datetime.datetime.strptime(str(self.last_updated), '%Y-%m-%d %H:%M:%S')
+
+            try:
+                created_strp = datetime.datetime.strptime(str(self.created_at), '%Y-%m-%d %H:%M:%S.%f')
+            except:
+                created_strp = datetime.datetime.strptime(str(self.created_at), '%Y-%m-%d %H:%M:%S')
+
+            print str(last_updated_strp-created_strp)
+            return last_updated_strp-created_strp

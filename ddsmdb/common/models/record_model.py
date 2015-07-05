@@ -57,11 +57,17 @@ class RecordModel(db.Document):
     @property
     def duration(self):
         try:
-            print str(datetime.datetime.strptime(str(self.updated_at), '%Y-%m-%d %H:%M:%S.%f')-datetime.datetime.strptime(str(self.created_at), '%Y-%m-%d %H:%M:%S.%f'))
-            return datetime.datetime.strptime(str(self.updated_at), '%Y-%m-%d %H:%M:%S.%f')-datetime.datetime.strptime(str(self.created_at), '%Y-%m-%d %H:%M:%S.%f')
+            updated_strp = datetime.datetime.strptime(str(self.updated_at), '%Y-%m-%d %H:%M:%S.%f')
         except:
-            print str(datetime.datetime.strptime(str(self.updated_at), '%Y-%m-%d %H:%M:%S')-datetime.datetime.strptime(str(self.created_at), '%Y-%m-%d %H:%M:%S'))
-            return datetime.datetime.strptime(str(self.updated_at), '%Y-%m-%d %H:%M:%S')-datetime.datetime.strptime(str(self.created_at), '%Y-%m-%d %H:%M:%S')
+            updated_strp = datetime.datetime.strptime(str(self.updated_at), '%Y-%m-%d %H:%M:%S')
+
+        try:
+            created_strp = datetime.datetime.strptime(str(self.created_at), '%Y-%m-%d %H:%M:%S.%f')
+        except:
+            created_strp = datetime.datetime.strptime(str(self.created_at), '%Y-%m-%d %H:%M:%S')
+
+        print str(updated_strp-created_strp)
+        return updated_strp-created_strp
 
     def info(self):
         data = {'updated':str(self.updated_at),
