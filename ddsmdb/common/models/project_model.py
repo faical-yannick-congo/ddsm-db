@@ -65,7 +65,7 @@ class ProjectModel(db.Document):
     @property
     def records(self):
         from ..models import RecordModel
-        return RecordModel.objects(project=self)
+        return RecordModel.objects(project=self).order_by('+created_at')
     
     @property
     def last_updated(self):
