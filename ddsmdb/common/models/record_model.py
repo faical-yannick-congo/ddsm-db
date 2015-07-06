@@ -39,7 +39,8 @@ class RecordModel(db.Document):
         for k, v in self.update_fields(data):
             if k in data.keys():
                 if k == 'created_at':
-                    self.created_at = datetime.datetime.strptime(data[k], '%Y-%m-%d %X')
+                    #self.created_at = datetime.datetime.strptime(data[k], '%Y-%m-%d %X')
+                    pass
                 else:
                     setattr(self, k, data[k])
                 del data[k]
